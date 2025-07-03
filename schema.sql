@@ -10,7 +10,8 @@ CREATE TABLE help_posts (
   contact_phone TEXT,
   latitude DOUBLE PRECISION,
   longitude DOUBLE PRECISION,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  password TEXT
 );
 
 
