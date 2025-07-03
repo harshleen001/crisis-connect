@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>CrisisConnect</h1>
+        <p>Your community help board during emergencies</p>
+        <a href="/" class="home-btn">🏠 Home</a>
+    </header>
+    <div class="form-header">
+        <h2>Add New Help Post</h2>
+        <p>Share your offer or request for help</p>
+    </div>
+
+    <form action="/add" method="POST" class="form-container">
+        <input type="text" name="title" placeholder="Title" required>
+
+        <select name="category" required>
+            <option disabled selected>Select a Category</option>
+            <option>Food</option>
+            <option>Medical</option>
+            <option>Shelter</option>
+            <option>Other</option>
+        </select>
+
+        <input type="text" name="location" placeholder="City / Location" required>
+
+        <textarea name="description" placeholder="Describe the situation" rows="4" required></textarea>
+
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="type" value="offer" required>
+                <span class="radio-label">🟢 I am offering help</span>
+            </label>
+
+            <label>
+                <input type="radio" name="type" value="request">
+                <span class="radio-label">🔴 I need help</span>
+            </label>
+        </div>
+
+        <input type="text" name="contact_name" placeholder="Your Name" required>
+        <input type="tel" name="contact_phone" placeholder="Contact Number" required>
+        <input type="password" name="password" placeholder="Set a password to delete/edit later" required>
+
+
+        <script>
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById("lat").value = position.coords.latitude;
+                document.getElementById("lon").value = position.coords.longitude;
+            });
+        </script>
+
+        <input type="hidden" name="latitude" id="lat">
+        <input type="hidden" name="longitude" id="lon">
+
+
+        <button type="submit" class="submit-btn">Post</button>
+    </form>
+
+
+</body>
+
+</html>

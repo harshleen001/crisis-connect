@@ -1,0 +1,265 @@
+/* ===== Base Setup ===== */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f7f9;
+  color: #333;
+}
+
+/* ===== Header ===== */
+header {
+  background: url('/images/crisis-bg.jpg') center/cover no-repeat, #003c3c;
+  color: white;
+  padding: 60px 20px 40px;
+  text-align: center;
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #d9f6f5;
+}
+
+.add-btn,
+.home-btn,
+#nearby-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.add-btn:hover,
+.home-btn:hover,
+#nearby-btn:hover {
+  background: linear-gradient(135deg, #019875, #00b894);
+}
+
+/* ===== Search & Filters ===== */
+.search-bar {
+  text-align: center;
+  margin: 25px auto;
+}
+
+.search-bar input[type="text"] {
+  width: 60%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 12px 18px;
+  margin-left: 10px;
+  background: #00796b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filters {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.filters a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #009688;
+  font-weight: 500;
+}
+
+.filters a.active {
+  color: #004d40;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ===== Post Cards ===== */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card.offer {
+  border-left: 8px solid #2e7d32;
+}
+
+.card.request {
+  border-left: 8px solid #c62828;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #222;
+}
+
+.badge {
+  background: #e0f2f1;
+  color: #00796b;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.tag {
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.card p {
+  margin: 8px 0;
+}
+
+/* ===== Delete Button ===== */
+.delete-form button {
+  background-color: #c62828;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.delete-form button:hover {
+  background-color: #b71c1c;
+}
+
+/* ===== Form Styling ===== */
+.form-container {
+  background-color: white;
+  padding: 35px;
+  border-radius: 14px;
+  max-width: 640px;
+  margin: auto;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+select,
+textarea {
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.radio-group label {
+  font-weight: 500;
+}
+
+.submit-btn {
+  background-color: #00796b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #00695c;
+}
+
+.empty {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #888;
+  margin: 60px 0;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: #003c3c;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+  margin-top: 60px;
+}
+
+/* ===== Pagination ===== */
+.pagination {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background-color: #e0e0e0;
+  color: #222;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 0 8px;
+  font-weight: 600;
+}
+
+.pagination button:hover {
+  background-color: #ccc;
+}

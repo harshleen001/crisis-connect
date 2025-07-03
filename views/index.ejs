@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CrisisConnect - Help Board</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>CrisisConnect</h1>
+        <p>Your community help board during emergencies</p>
+
+
+
+        <a href="/add" class="add-btn">➕ Add New Post</a>
+
+
+    </header>
+
+    <main>
+        <!-- search  bar -->
+        <div class="search-bar">
+            <form method="GET" action="/">
+                <input type="text" name="search" placeholder="Search by keyword" value="<%= searchQuery %>">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- filter bar -->
+        <div class="filters">
+            Filter by:
+            <a href="/" class="<%= selectedCategory === '' ? 'active' : '' %>">All</a> |
+            <a href="/?category=Food" class="<%= selectedCategory === 'Food' ? 'active' : '' %>">Food</a> |
+            <a href="/?category=Medical" class="<%= selectedCategory === 'Medical' ? 'active' : '' %>">Medical</a>
+            |
+            <a href="/?category=Shelter" class="<%= selectedCategory === 'Shelter' ? 'active' : '' %>">Shelter</a> |
+            <a href="/?category=Other" class="<%= selectedCategory === 'Other' ? 'active' : '' %>">Other</a>
+
+
+        </div>
+        <div style="text-align:center; margin: 20px 0;">
+            <button id="nearby-btn">📍 Show Nearby Help</button>
+        </div>
+        <% if (isNearby) { %>
+            <p style="text-align:center; color:#555;">Showing posts within 10km of your current location</p>
+            <% } %>
+
+
+                <% if (updates.length===0) { %>
+                    <p class="empty">No help posts yet.</p>
+                    <% } else { %>
+                        <div class="post-grid">
+                            <% updates.forEach(update=> { %>
+                                <div class="card <%= update.type === 'offer' ? 'offer' : 'request' %>">
+                                    <h3>
+                                        <%= update.title %>
+                                    </h3>
+                                    <span class="badge">
+                                        <%= update.category %>
+                                    </span>
+                                    <p>
+                                        <%= update.description %>
+                                    </p>
+                                    <p><strong>Location:</strong>
+                                        <%= update.location %>
+                                    </p>
+                                    <p><strong>Contact:</strong>
+                                        <%= update.contact_name %> - <%= update.contact_phone %>
+                                    </p>
+                                    <p class="tag">
+                                        <%= update.type==='offer' ? '🟢 Offering Help' : '🔴 Needs Help' %>
+                                    </p>
+                                    <div class="date">
+                                        <small>Posted on <%= update.formattedDate %></small>
+                                    </div>
+                                    <form method="POST" action="/delete/<%= update.id %>" class="delete-form">
+                                        <button type="button"
+                                            onclick="promptPassword('<%= update.id %>')">Delete</button>
+                                    </form>
+                                    
+
+
+                                </div>
+
+
+                                <% }) %>
+
+
+                        </div>
+
+                        <% } %>
+    </main>
+    <footer>
+        <div class="pagination">
+            <% if (page> 1) { %>
+                <a
+                    href="?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %><%= searchQuery ? 'search=' + searchQuery + '&' : '' %>page=<%= page - 1 %>">
+                    <button>⬅ Prev</button>
+                </a>
+                <% } %>
+
+                    <span style="font-weight: bold;">Page <%= page %> of <%= totalPages %></span>
+
+                    <% if (page < totalPages) { %>
+                        <a
+                            href="?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %><%= searchQuery ? 'search=' + searchQuery + '&' : '' %>page=<%= page + 1 %>">
+                            <button>Next ➡</button>
+                        </a>
+                        <% } %>
+        </div>
+    </footer>
+
+</body>
+<script>
+    document.getElementById("nearby-btn").addEventListener("click", () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    window.location.href = `/nearby?lat=${lat}&lon=${lon}`;
+                },
+                (error) => {
+                    alert("Location access denied or unavailable.");
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function promptPassword(id) {
+        Swal.fire({
+            title: 'Enter password to delete',
+            input: 'password',
+            inputPlaceholder: 'Enter your password',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            preConfirm: (password) => {
+                return fetch(`/delete/${id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `password=${encodeURIComponent(password)}`
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                throw new Error(text);
+                            });
+                        }
+                    });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Deleted!', 'Your post has been deleted.', 'success')
+                    .then(() => location.reload());
+            }
+        }).catch(err => {
+            Swal.fire('Error', err.message, 'error');
+        });
+    }
+</script>
+
+
+
+
+</html>
