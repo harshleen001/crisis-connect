@@ -263,3 +263,95 @@ footer {
 .pagination button:hover {
   background-color: #ccc;
 }
+
+
+/* ===== Responsive Styles ===== */
+
+/* Tablets and smaller screens */
+@media (max-width: 900px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  .search-bar input[type="text"] {
+    width: 80%;
+  }
+
+  .form-container {
+    padding: 25px;
+  }
+
+  .post-grid {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .filters a {
+    display: inline-block;
+    margin: 5px 6px;
+  }
+}
+
+/* Phones and small devices */
+@media (max-width: 600px) {
+  header {
+    padding: 40px 15px 25px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .add-btn,
+  .home-btn,
+  #nearby-btn {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .search-bar button {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .filters {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .form-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  input, select, textarea {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+  }
+
+  .delete-form button,
+  .submit-btn {
+    width: 100%;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
